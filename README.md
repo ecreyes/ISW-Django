@@ -2,6 +2,7 @@
 * [Python 3.5.0](https://www.python.org/downloads/)
 * [Pyscopg2](http://www.stickpeople.com/projects/python/win-psycopg/)
 * [PostgreSQL](https://www.postgresql.org/download/)
+* [Yahoo Quote Download](https://github.com/c0redumb/yahoo_quote_download)
 
 ## Configurar ambiente de trabajo
 1. Instalar Django de manera global, abrir cmd
@@ -54,6 +55,11 @@ easy_install psycopg2-2.6.2.win-amd64-py3.5-pg9.5.3-release.exe
 ```
 
 ## Instalar los requerimientos de el entorno virtual.
+Primero instalar el Yahoo quote downloads que no esta en pip, para hacer esto una vez dentro del entorno virtual entrar por cmd a la carpeta de yahoo y ejecutar el archivo `setup.py`
+```
+setup.py install
+```
+Luego usar el comando de abajo.
 Este comando permitirá instalar todos los paquetes que necesita el proyecto y los instalará pip
 ```
 pip install -r requirements.txt
