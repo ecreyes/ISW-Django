@@ -52,3 +52,9 @@ Al ejecutar `pip freeze` (estamos utilizando un entorno virtual,por eso no se us
 ```=bash
 easy_install psycopg2-2.6.2.win-amd64-py3.5-pg9.5.3-release.exe
 ```
+
+## Instalar los requerimientos de el entorno virtual.
+Este comando permitirá instalar todos los paquetes que necesita el proyecto y los instalará pip
+```
+pip install -r requirements.txt
+```
