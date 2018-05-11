@@ -83,3 +83,18 @@ DATABASES = {
 * user = usuario que se escribio al instalar postgresql, por default es postgres
 * password = contraseña que se utilizo al instalar postgresql
 Los demas campos DEBEN quedar como estan.
+
+## Crear el usuario administrador.
+Si la configuración anterior fue correcta se podrá hacer las migraciones y crear el administrador del sitio.
+Primero correr las migraciones
+```
+manage.py migrate
+```
+Luego crear el administrador
+```
+manage.py createsuperuser admin
+```
+Los unicos campos que interesan son el de
+* Nombre = admin
+* password = django12345
+los demas se pueden omitir
