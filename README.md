@@ -46,3 +46,9 @@ y para desactivar el entorno virtual escribir
 ```=bash
 deactivate
 ```
+
+Al ejecutar `pip freeze` (estamos utilizando un entorno virtual,por eso no se usa python -m) vemos que falta Pyscopg2,entonces hay que hacer lo siguiente.
+* Ejecutar
+```=bash
+easy_install psycopg2-2.6.2.win-amd64-py3.5-pg9.5.3-release.exe
+```
