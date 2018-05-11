@@ -64,3 +64,22 @@ Este comando permitirá instalar todos los paquetes que necesita el proyecto y l
 ```
 pip install -r requirements.txt
 ```
+
+## Configurar la base de datos.
+En el proyeto se debe crear una base de datos con los siguientes campos.
+```
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'isw',
+        'USER': 'postgres',
+        'PASSWORD': '12345',
+        'HOST':'localhost',
+        'PORT': 5432,
+    }
+}
+```
+* Nombre = isw (nombre de la base de datos)
+* user = usuario que se escribio al instalar postgresql, por default es postgres
+* password = contraseña que se utilizo al instalar postgresql
+Los demas campos DEBEN quedar como estan.
