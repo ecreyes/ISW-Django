@@ -92,7 +92,7 @@ manage.py migrate
 ```
 Luego crear el administrador
 ```
-manage.py createsuperuser admin
+manage.py createsuperuser
 ```
 Los unicos campos que interesan son el de
 * Nombre = admin
