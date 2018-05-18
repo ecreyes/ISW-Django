@@ -67,6 +67,7 @@ pip install -r requirements.txt
 
 ## Configurar la base de datos.
 En el proyeto se debe crear una base de datos con los siguientes campos.
+Este campo esta en la carpeta ISW/settings.py
 ```
 DATABASES = {
     'default': {
