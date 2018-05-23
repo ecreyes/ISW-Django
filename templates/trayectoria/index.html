@@ -1,26 +1,11 @@
-<!--html>
+{% extends 'base/base.html' %}
 
-<title>
-    Valoración de Opciones Sobre Acciones
-</title>
-<form>
-    {{form.as_p }}
-    <input type='submit' value='Calcular'>
-</form>
+{% block title %}
+Valoración de Acciones sobre Opciones
+{% endblock %}
 
-
-</html!-->
-<html>
-
-<head lang="en">
-    <meta charset="UTF-8">
-    <title>Valoración de Acciones sobre Opciones</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-</head>
+{% block content %}
 <div class="container">
-
     <form class="well form-horizontal" action=" " method="post" id="contact_form">
         {% csrf_token %}
         <fieldset>
@@ -126,7 +111,5 @@
         </fieldset>
     </form>
 </div>
-</div>
 <!-- /.container -->
-
-</html>
+{% endblock %}
