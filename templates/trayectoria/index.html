@@ -1,9 +1,132 @@
-{% extends 'base/base.html' %}
+<!--html>
 
-{% block title %}
-Inicio
-{% endblock %}
+<title>
+    Valoración de Opciones Sobre Acciones
+</title>
+<form>
+    {{form.as_p }}
+    <input type='submit' value='Calcular'>
+</form>
 
-{% block content %}
-<p>Bienvenido a la página</p>
-{% endblock %}
+
+</html!-->
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Valoración de Acciones sobre Opciones</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+</head>
+<div class="container">
+
+    <form class="well form-horizontal" action=" " method="post" id="contact_form">
+        {% csrf_token %}
+        <fieldset>
+
+            <!-- Form Name -->
+            <legend>Valoración de Acciones</legend>
+
+            <!-- Text input-->
+
+            <div class="form-group">
+                <label class="col-md-4 control-label">Símbolo de Empresa</label>
+                <div class="col-md-4">
+                    <div class="input-group">
+                        {{form.symbol}}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Text input-->
+
+            <div class="form-group">
+                <label class="col-md-4 control-label">Tasa de Interes Libre de Riesgo (r) </label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        {{form.tasa_de_interes}}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group ">
+                <label class="col-md-4 control-label ">Tiempo en Años(T) </label>
+                <div class="col-md-4 inputGroupContainer ">
+                    <div class="input-group ">
+                        {{form.tiempo_años}}
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- Text input-->
+
+            <div class="form-group ">
+                <label class="col-md-4 control-label ">Tipo</label>
+                <div class="col-md-4 inputGroupContainer ">
+                    <div class="input-group ">
+                        {{form.tipo}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group ">
+                <label class="col-md-4 control-label ">Opcion</label>
+                <div class="col-md-4 inputGroupContainer ">
+                    <div class="input-group ">
+                        {{form.opcion}}
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-group ">
+                <label class="col-md-4 control-label ">Precio(K)</label>
+                <div class="col-md-4 inputGroupContainer ">
+                    <div class="input-group ">
+                        {{form.precio}}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Text input-->
+
+            <div class="form-group">
+                <label class="col-md-4 control-label ">Desde</label>
+                <div class="col-md-4 inputGroupContainer ">
+                    <div class="input-group ">
+                        {{form.desde}}
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-group ">
+                <label class="col-md-4 control-label ">Hasta</label>
+                <div class="col-md-4 inputGroupContainer ">
+                    <div class="input-group ">
+                        {{form.hasta}}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Button -->
+            <div class="form-group ">
+                <label class="col-md-4 control-label "></label>
+                <div class="col-md-4 ">
+                    <button type="submit " class="btn btn-success ">Calcular
+                        <span class="glyphicon glyphicon-send "></span>
+                    </button>
+                </div>
+            </div>
+
+        </fieldset>
+    </form>
+</div>
+</div>
+<!-- /.container -->
+
+</html>
