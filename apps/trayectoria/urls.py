@@ -3,5 +3,5 @@ from apps.trayectoria.views import index
 
 app_name = 'apps'
 urlpatterns = [
-    path('', index),
+    path('', index,name='trayectoria_index'),
 ]
