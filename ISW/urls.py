@@ -16,13 +16,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from django.contrib.auth.views import login,\
-        password_reset,password_reset_done,password_reset_confirm,password_reset_complete
+        password_reset,password_reset_done,password_reset_confirm,password_reset_complete,\
+        logout_then_login
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('trayectoria/',include('apps.trayectoria.urls',namespace='trayectoria')),
     path('usuario/',include('apps.usuario.urls',namespace='usuario')),
     path('',login,{'template_name':'index.html'},name='login'),
+    path('logout/',logout_then_login,name='logout'),
     path('reset/password_reset',password_reset,{'template_name':'registration/password_reset_form.html',
         'email_template_name':'registration/password_reset_email.html'},name='password_reset'),
     path('reset/password_done',password_reset_done,
