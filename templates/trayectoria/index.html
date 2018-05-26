@@ -5,6 +5,11 @@ Valoración de Acciones sobre Opciones
 {% endblock %}
 
 {% block content %}
+<nav>
+    <ul>
+        <li><a href="{% url 'logout' %}">Salir</a></li>
+    </ul>
+</nav>
 <div class="container">
     <form class="well form-horizontal" action=" " method="post" id="contact_form">
         {% csrf_token %}
