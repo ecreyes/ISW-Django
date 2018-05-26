@@ -18,7 +18,6 @@ from django.urls import path,include
 from django.contrib.auth.views import login,\
         password_reset,password_reset_done,password_reset_confirm,password_reset_complete,\
         logout_then_login
-#from apps.formulario import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
