@@ -23,5 +23,5 @@ class FormularioArchivoCsv(forms.Form):
     opcion = forms.ChoiceField(choices=OPCION)
     desde = forms.DateField(initial=YESTERDAY)
     hasta = forms.DateField(initial=datetime.date.today)
-    
+
     
