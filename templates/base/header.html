@@ -9,14 +9,25 @@
 	      <li class="nav-item">
 	        <a class="nav-link" href="{% url 'formulario:formulario_archivo' %}">Modo Offline</a>
 	      </li>
+	      <li class="nav-item">
+	      	{% if user.is_authenticated %}
+	          	<a class="nav-link" href="{% url 'trayectoria:trayectoria_index' %}">Simulación</a>
+	        {% endif %}
+	      </li>
 	      <li class="nav-item dropdown ml-auto">
 	        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 	          Panel de Usuario
 	        </a>
-	        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-	          <a class="dropdown-item" href="{% url 'login' %}">Iniciar Sesión</a>
-	          <a class="dropdown-item" href="{% url 'usuario:registrar' %}">Registro</a>
-	        </div>
+	        {% if user.is_authenticated %}
+	          	<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+		          <a class="dropdown-item" href="{% url 'logout' %}">Salir</a>
+		        </div>
+	        {% else %}
+	        	<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+		          <a class="dropdown-item" href="{% url 'login' %}">Iniciar Sesión</a>
+		          <a class="dropdown-item" href="{% url 'usuario:registrar' %}">Registro</a>
+		        </div>
+	        {% endif %}
 	      </li>
 	    </ul>  
 	  </div>
