@@ -18,6 +18,9 @@ from django.urls import path,include
 from django.contrib.auth.views import login,\
         password_reset,password_reset_done,password_reset_confirm,password_reset_complete,\
         logout_then_login
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -35,3 +38,7 @@ urlpatterns = [
         {'template_name':'registration/password_reset_complete.html'},name='password_reset_complete'),
     path('formulario/',include('apps.formulario.urls',namespace='formulario')),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

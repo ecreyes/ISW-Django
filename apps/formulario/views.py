@@ -3,18 +3,26 @@ from .forms import FormularioArchivoCsv
 from django.forms.widgets import Select, Widget
 from django.http import HttpResponseRedirect
 from django.template import RequestContext
+from django.urls import reverse_lazy
+#def handle_uploaded_file(f):
+#    with open('some/file/name.csv', 'wb+') as destination: #directorio donde deberia ir el  archivo
+#        for chunk in f.chunks():
+#            destination.write(chunk)
 
+
+#cambiar directorio
 def handle_uploaded_file(f):
-    with open('some/file/name.csv', 'wb+') as destination: #directorio donde deberia ir el  archivo
+    with open('C:/Users/fgfg/Desktop/ISW-D/ISW-Django/apps/formulario/media/nuevo_archivo.csv', 'wb+') as destination:
         for chunk in f.chunks():
             destination.write(chunk)
+
 
             
 def form_file(request):
     if request.method == 'POST':
-        form = TrayectoriaForm(request.POST, request.FILES)
+        form = FormularioArchivoCsv(request.POST, request.FILES)
         if form.is_valid():
-            handle_uploaded_file(request.FILES['symbol'])
+            file = request.FILES['symbol']
             tasa_de_interes = form.cleaned_data['tasa_de_interes']
             tiempo_años = form.cleaned_data['tiempo_años']
             precio = form.cleaned_data['precio']
@@ -22,7 +30,9 @@ def form_file(request):
             opcion = form.cleaned_data['opcion']
             desde = form.cleaned_data['desde']
             hasta = form.cleaned_data['hasta']
-            return HttpResponseRedirect('/graficos/') #Redirigir a misma pagina que 'trayectorias'
+            handle_uploaded_file(request.FILES['symbol'])
+            print(file)
+            return HttpResponseRedirect('/graficos/') #Redirigir a nueva pagina ,agregando los datos obtenidos del formulario como contexto
     else:
         form = FormularioArchivoCsv()
         context = {"form": form}

@@ -71,6 +71,7 @@ TEMPLATES = [
     },
 ]
 
+
 WSGI_APPLICATION = 'ISW.wsgi.application'
 
 
@@ -127,6 +128,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+
 LOGIN_URL = reverse_lazy('login')
 LOGIN_REDIRECT_URL = reverse_lazy('trayectoria:trayectoria_index')
 LOGOUT_REDIRECT_URL = reverse_lazy('login')
@@ -137,3 +139,6 @@ EMAIL_PORT = 25
 EMAIL_HOST_USER = 'midgard7isw@gmail.com'
 EMAIL_HOST_PASSWORD = 'midgard7'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
