@@ -1,0 +1,15 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+Valoración de Acciones sobre Opciones
+{% endblock %}
+
+{% block content %}
+<h1>Resultados</h1>
+{%if funcion %}
+		<h3>F(x,t)={{funcion}}</h3>
+{%endif %}
+{% if promedio%}
+		<h2>Promedio={{promedio}}</h2>
+{% endif %}
+{% endblock %}
