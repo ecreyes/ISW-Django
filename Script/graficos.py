@@ -24,7 +24,7 @@ def val_traVSnum_iter(valores_trayectorias,media_trayectoria):
 def val_tra_maxVSnum_iter(valores_max):
     num_iter = range(0,len(valores_max))
     plt.plot(num_iter, valores_max, 'ro',label="Valor máximo (entre 0 y valor-precio) por iteración")
-    plt.axhline(y=np.mean(valores_max),linewidth=4, color='b',label="Promedio Trayectorias")
+    plt.axhline(y=np.mean(valores_max),linewidth=4, color='b',label="Promedio valores máximos")
     plt.axis([0, len(num_iter), min(valores_max), max(valores_max)])
     plt.title("Num. Iteracion VS Valor máximo trayectoria")
     plt.xlabel("Num. Iteracion")
@@ -47,6 +47,6 @@ def tiempoVSval_cierre(valores_cierre,dias_i):
     plt.show()
 
 
-#val_traVSnum_iter(valores_trayectorias,media_trayectoria)
+val_traVSnum_iter(valores_trayectorias,media_trayectoria)
 #tiempoVSval_cierre(valores_cierre,dias_i)
-val_tra_maxVSnum_iter(valores_max)
+#val_tra_maxVSnum_iter(valores_max)
