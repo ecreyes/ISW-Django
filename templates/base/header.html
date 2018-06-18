@@ -2,36 +2,37 @@
 	<nav class="navbar fixed-top navbar-expand-lg navbar navbar-dark bg-success" style="-webkit-box-shadow: 0px 5px 11px 0px rgba(0,0,0,0.75);
 -moz-box-shadow: 0px 5px 11px 0px rgba(0,0,0,0.75);
 box-shadow: 0px 5px 11px 0px rgba(0,0,0,0.75);">
-	  <a class="navbar-brand" href="#">ISW</a>
-	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-	    <span class="navbar-toggler-icon"></span>
-	  </button>
-	  <div class="collapse navbar-collapse" id="navbarNavDropdown">
-	    <ul class="navbar-nav w-100">
-	      <li class="nav-item">
-	        <a class="nav-link" href="{% url 'formulario:formulario_archivo' %}">Modo Offline</a>
-	      </li>
-	      <li class="nav-item">
-	      	{% if user.is_authenticated %}
-	          	<a class="nav-link" href="{% url 'trayectoria:trayectoria_index' %}">Simulación</a>
-	        {% endif %}
-	      </li>
-	      <li class="nav-item dropdown ml-auto">
-	        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-	          Panel de Usuario
-	        </a>
-	        {% if user.is_authenticated %}
-	          	<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-		          <a class="dropdown-item" href="{% url 'logout' %}">Salir</a>
-		        </div>
-	        {% else %}
-	        	<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-		          <a class="dropdown-item" href="{% url 'login' %}">Iniciar Sesión</a>
-		          <a class="dropdown-item" href="{% url 'usuario:registrar' %}">Registro</a>
-		        </div>
-	        {% endif %}
-	      </li>
-	    </ul>  
-	  </div>
+		<a class="navbar-brand" href="#">ISW</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
+		 aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNavDropdown">
+			<ul class="navbar-nav w-100">
+				<li class="nav-item">
+					<a class="nav-link" href="{% url 'formulario:formulario_archivo' %}">Modo Offline</a>
+				</li>
+				<li class="nav-item">
+					{% if user.is_authenticated %}
+					<a class="nav-link" href="{% url 'trayectoria:trayectoria_index' %}">Simulación</a>
+					{% endif %}
+				</li>
+				<li class="nav-item dropdown ml-auto">
+					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						Panel de Usuario
+					</a>
+					{% if user.is_authenticated %}
+					<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+						<a class="dropdown-item" href="{% url 'logout' %}">Salir</a>
+					</div>
+					{% else %}
+					<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+						<a class="dropdown-item" href="{% url 'login' %}">Iniciar Sesión</a>
+						<a class="dropdown-item" href="{% url 'usuario:registrar' %}">Registro</a>
+					</div>
+					{% endif %}
+				</li>
+			</ul>
+		</div>
 	</nav>
 </header>
