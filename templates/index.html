@@ -1,41 +1,103 @@
-{% extends 'base/base.html'%}
-
-{% block title %}
-Login
-{% endblock %}
-
-{% block content %}
-<div class="row">
-    <div class="col-3"></div>
-    <div class="col-6">
-        <div class="container-fluid" style="margin-top:10%;">
-            <div class="card" style="-webkit-box-shadow: 8px 9px 18px -11px rgba(0,0,0,0.75);
--moz-box-shadow: 8px 9px 18px -11px rgba(0,0,0,0.75);
-box-shadow: 8px 9px 18px -11px rgba(0,0,0,0.75);">
-              <div class="card-body">
-                    <form method="post">
-                        {% csrf_token %}
-                        <h5 class="card-title">Inicia la sesión</h5>
-                        <div class="form-group">
-                            <label for="username">Nombre de Usuario</label>
-                            <input class="form-control" type="text" name="username">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="username">Contraseña</label>
-                            <input class="form-control" type="password" name="password">
-                        </div>
-                        <button type='submit' class="btn btn-primary">Ingresar</button>
-                        <a href="{% url 'usuario:registrar' %}" class="float-right">¿No tienes cuenta? Registrate aquí</a> 
-                        <div class="form-group">
-                            <a href="{% url 'password_reset'%}" class="float-right">Olvidé mi contraseña</a>
-                        </div>
-                    </form> 
-              </div>
-            </div>  
+{% extends 'base/base.html'%} {% block title %} Login {% endblock %} {% block content %}
+<link rel="stylesheet" type="text/css" href=https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.min.css>
+<div class="modal-dialog text-center">
+    <div class="col-sm-9 main-section">
+        <div class="modal-content">
+            <div class='col-12 form-input'>
+                <form method="POST">
+                    {% csrf_token%}
+                    <div class="form-group">
+                        <input type="text" name="username" class="form-control" id='username' placeholder="Username">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="password" class="form-control" id="password" placeholder="Password">
+                    </div>
+                    <button type="submit" class="btn btn-success">Ingresar</button>
+                </form>
+            </div>
+            <div class="col-12 forgot">
+                <a href="{% url 'usuario:registrar' %}"> ¿No tienes Cuenta? Crea una aquí</a>
+            </div>
+            <div class="col-12 forgot">
+                <a href="{% url 'password_reset'%}"> Olvidé mi Contraseña</a>
+            </div>
         </div>
     </div>
-    <div class="col-3"></div>
 </div>
 
+<style type="text/css">
+    @import url('https://fonts.googleapis.com/css?family=Roboto');
+    body {
+        font-family: 'Roboto', sans-serif;
+        background-image: url(http://www.v3wall.com/wallpaper/1920_1080/1008/1920_1080_20100831085037288256.jpg);
+        background-size: cover;
+    }
+
+    .main-section {
+        margin: 0 auto;
+        margin-top: 70px;
+        padding: 0;
+    }
+
+    .modal-content {
+        background-color: #434e5a;
+        opacity: .8;
+        padding: 0 18px;
+        border-radius: 10px;
+    }
+
+    .form-group {
+        margin-bottom: 25px;
+        margin-top: 20px;
+        font-size: 18px;
+    }
+
+    .form-group input {
+        height: 42px;
+        border-radius: 5px;
+        border: 0;
+        letter-spacing: 2px;
+        padding-left: 54px;
+    }
+
+    .form-group::before {
+        font-family: 'Font Awesome\ 5 Free';
+        content: "\f1fa";
+        position: absolute;
+        font-size: 22px;
+        left: 28px;
+        padding-top: 4px;
+        color: #555e60;
+    }
+
+    .form-group:last-of-type::before {
+        content: "\f023";
+    }
+
+    .form-input button {
+        width: 40%;
+        margin: 5px 0px 25px;
+    }
+
+    .btn-success {
+        background-color: #1c6288;
+        font-size: 19px;
+        border-radius: 5px;
+        padding: 7px 14px;
+        border: 1px solid #daf1ff;
+    }
+
+    .btn-success:hover {
+        background-color: #13445e;
+        border: 1px solid #daf1ff;
+    }
+
+    .forgot {
+        padding: 5px 0 25px;
+    }
+
+    .forgot a {
+        color: #daf1ff;
+    }
+</style>
 {% endblock %}﻿

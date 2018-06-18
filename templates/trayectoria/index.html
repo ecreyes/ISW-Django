@@ -1,10 +1,5 @@
-{% extends 'base/base.html' %}
-
-{% block title %}
-Valoración de Acciones sobre Opciones
-{% endblock %}
-
-{% block content %}
+{% extends 'base/base.html' %} {% block title %} Valoración de Acciones sobre Opciones {% endblock %} {% block content %}
+<link rel="stylesheet" type="text/css" href=https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.min.css>
 <div class="container">
     <form class="well form-horizontal" action=" " method="post" id="contact_form">
         {% csrf_token %}
@@ -14,102 +9,142 @@ Valoración de Acciones sobre Opciones
             <legend>Valoración de Acciones</legend>
 
             <!-- Text input-->
+            <div class="border border-secondary" style="-webkit-box-shadow: 8px 9px 18px -11px rgba(0,0,0,0.75);
+				-moz-box-shadow: 8px 9px 18px -11px rgba(0,0,0,0.75);
+                box-shadow: 8px 9px 18px -11px rgba(0,0,0,0.75);">
+                <div class="container">
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="col-md-12 control-label">Símbolo de Empresa</label>
+                            <div class="col-md-6">
+                                <div class="input-group">
+                                    {{form.symbol}}
+                                </div>
+                            </div>
+                        </div>
 
-            <div class="form-group">
-                <label class="col-md-4 control-label">Símbolo de Empresa</label>
-                <div class="col-md-4">
-                    <div class="input-group">
-                        {{form.symbol}}
+                        <!-- Text input-->
+
+                        <div class="form-group">
+                            <label class="col-md-12 control-label">Tasa de Interes Libre de Riesgo (r) </label>
+                            <div class="col-md-6 inputGroupContainer">
+                                <div class="input-group">
+                                    {{form.tasa_de_interes}}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Text input-->
+                <div class="container">
+                    <div class="row">
+                        <!-- Text input-->
+                        <div class="form-group ">
+                            <label class="col-md-12 control-label ">Tiempo en Años(T) </label>
+                            <div class="col-md-6 inputGroupContainer ">
+                                <div class="input-group ">
+                                    {{form.tiempo_años}}
+                                </div>
+                            </div>
+                        </div>
 
-            <div class="form-group">
-                <label class="col-md-4 control-label">Tasa de Interes Libre de Riesgo (r) </label>
-                <div class="col-md-4 inputGroupContainer">
-                    <div class="input-group">
-                        {{form.tasa_de_interes}}
+
+
+                        <!-- Text input-->
+
+                        <div class="form-group ">
+                            <label class="col-md-12 control-label ">Tipo</label>
+                            <div class="col-md-6 inputGroupContainer ">
+                                <div class="input-group ">
+                                    {{form.tipo}}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Text input-->
-            <div class="form-group ">
-                <label class="col-md-4 control-label ">Tiempo en Años(T) </label>
-                <div class="col-md-4 inputGroupContainer ">
-                    <div class="input-group ">
-                        {{form.tiempo_años}}
+                <div class="container">
+                    <div class="row">
+                        <div class="form-group ">
+                            <label class="col-md-12 control-label ">Opcion</label>
+                            <div class="col-md-6 inputGroupContainer ">
+                                <div class="input-group ">
+                                    {{form.opcion}}
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group ">
+                            <label class="col-md-12 control-label ">Precio(K)</label>
+                            <div class="col-md-6 inputGroupContainer ">
+                                <div class="input-group ">
+                                    {{form.precio}}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
+
+                <!-- Text input-->
+                <div class="container">
+                    <div class="row">
+
+                        <div class="form-group">
+                            <label class="col-md-12 control-label ">Desde</label>
+                            <div class="col-md-6 inputGroupContainer ">
+                                <div class="input-group ">
+                                    {{form.desde}}
+                                </div>
+                            </div>
+                        </div>
 
 
-
-            <!-- Text input-->
-
-            <div class="form-group ">
-                <label class="col-md-4 control-label ">Tipo</label>
-                <div class="col-md-4 inputGroupContainer ">
-                    <div class="input-group ">
-                        {{form.tipo}}
+                        <div class="form-group ">
+                            <label class="col-md-12 control-label ">Hasta</label>
+                            <div class="col-md-6 inputGroupContainer ">
+                                <div class="input-group ">
+                                    {{form.hasta}}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="form-group ">
-                <label class="col-md-4 control-label ">Opcion</label>
-                <div class="col-md-4 inputGroupContainer ">
-                    <div class="input-group ">
-                        {{form.opcion}}
+                <!-- Button -->
+                <div class="form-group ">
+                    <label class="col-md-4 control-label "></label>
+                    <div class="col-md-4 ">
+                        <button type="submit " class="btn btn-success ">Calcular
+                            <span class="glyphicon glyphicon-send "></span>
+                        </button>
                     </div>
                 </div>
-            </div>
-
-
-            <div class="form-group ">
-                <label class="col-md-4 control-label ">Precio(K)</label>
-                <div class="col-md-4 inputGroupContainer ">
-                    <div class="input-group ">
-                        {{form.precio}}
-                    </div>
-                </div>
-            </div>
-
-            <!-- Text input-->
-
-            <div class="form-group">
-                <label class="col-md-4 control-label ">Desde</label>
-                <div class="col-md-4 inputGroupContainer ">
-                    <div class="input-group ">
-                        {{form.desde}}
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="form-group ">
-                <label class="col-md-4 control-label ">Hasta</label>
-                <div class="col-md-4 inputGroupContainer ">
-                    <div class="input-group ">
-                        {{form.hasta}}
-                    </div>
-                </div>
-            </div>
-
-            <!-- Button -->
-            <div class="form-group ">
-                <label class="col-md-4 control-label "></label>
-                <div class="col-md-4 ">
-                    <button type="submit " class="btn btn-success ">Calcular
-                        <span class="glyphicon glyphicon-send "></span>
-                    </button>
-                </div>
-            </div>
 
         </fieldset>
     </form>
+    </div>
 </div>
 <!-- /.container -->
+<!-- /.container -->
+<style type="text/css">
+    @import url('https://fonts.googleapis.com/css?family=Roboto');
+    body {
+        color: #ffffff;
+        font-family: 'Roboto', sans-serif;
+        background-size: cover;
+    }
+
+    legend {
+        text-align: center;
+        color: #000000;
+
+    }
+
+    .border {
+        background-color: #434e5a;
+        padding: 0 18px;
+        border-radius: 10px;
+    }
+</style>
 {% endblock %}
