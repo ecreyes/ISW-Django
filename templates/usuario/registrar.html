@@ -1,116 +1,55 @@
 {% extends 'base/base.html' %} {% block title %} Registrar {% endblock %} {% block content %}
 <link rel="stylesheet" type="text/css" href=https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.min.css>
-<div class="modal-dialog text-center">
-	<div class="col-sm-9 main-section">
-		<div class="modal-content">
-			<div class='col-12 form-input'>
-				<form method="POST">
-					{% csrf_token %}
-					<h5 class="card-title">Registro de usuario</h5>
-					<div class="form-group">
-						<input class="form-control" type="text" name="username" placeholder="Nombre de usuario" id="para1">
+<div class="modal-body row">
+	<div class="col-md-6">
+		<legend>Utiliza nuestro software para obtener predicciones sobre acciones de cientos de empresas</legend>
+		<img class="img-thumbnail" src="http://via.placeholder.com/660x160.png">
+		<div class="caption">
+			<p>¡Mas de 1000 Empresas con las cuales calcular valores de Opciones!</p>
+		</div>
+		<img class="img-thumbnail" src="http://via.placeholder.com/660x160.png">
+		<div class="caption">
+			<p>¡Puedes obtener los archivos con valores de cierre en :</p>
+			<a href="https://finance.yahoo.com/"> Yahoo Finance</a>
+		</div>
+	</div>
+	<div class="col-md-6">
+		<div class="container-fluid  py-3">
+			<div class="row">
+				<div class="col-md-12 mx-auto">
+					<div class="card card-body">
+						<h3 class="text-center mb-4">Registro de Usuario</h3>
+						<form method="POST">
+							{% csrf_token %}
+							<div class="form-group">
+								<input class="form-control" type="text" name="username" placeholder="Nombre de usuario" id="para1">
+							</div>
+							<div class="form-group">
+								<input class="form-control" type="text" name="email" placeholder="Correo">
+							</div>
+							<div class="form-group">
+								<input class="form-control" type="password" name="password1" placeholder="Contraseña">
+							</div>
+							<div class="form-group">
+								<input class="form-control" type="password" name="password2" placeholder="Confirmar Contraseña">
+							</div>
+							<button type="submit" class="btn btn-lg btn-success btn-block">Crear cuenta</button>
+						</form>
 					</div>
-					<div class="form-group">
-						<input class="form-control" type="text" name="email" placeholder="Correo">
-					</div>
-					<div class="form-group">
-						<input class="form-control" type="password" name="password1" placeholder="Contraseña">
-					</div>
-					<div class="form-group">
-						<input class="form-control" type="password" name="password2" placeholder="Confirmar Contraseña">
-					</div>
-					<button type="submit" class="btn btn-success">Crear cuenta</button>
-				</form>
+				</div>
 			</div>
 		</div>
 	</div>
 </div>
 <style type="text/css">
-	@import url('https://fonts.googleapis.com/css?family=Roboto');
-	body {
-		font-family: 'Roboto', sans-serif;
-		background-size: cover;
+	a {
+		color: green;
+		text-align: center;
 	}
 
-	.main-section {
-		margin: 0 auto;
-		margin-top: 70px;
-		padding: 0;
-	}
-
-	.modal-content {
-		background-color: #434e5a;
-		padding: 0 18px;
-		border-radius: 10px;
-	}
-
-	.form-group {
-		margin-bottom: 25px;
-		margin-top: 20px;
-		font-size: 18px;
-	}
-
-	.form-group input {
-		height: 42px;
-		border-radius: 5px;
-		border: 0;
-		letter-spacing: 2px;
-		padding-left: 54px;
-	}
-
-	.form-group::before {
-		font-family: 'Font Awesome\ 5 Free';
-		content: "\f1fa";
-		position: absolute;
-		font-size: 22px;
-		left: 28px;
-		padding-top: 4px;
-		color: #555e60;
-	}
-
-
-	.form-group:nth-of-type(1)::before {
-		font-family: 'Font Awesome\ 5 Free';
-		content: "\f007";
-		position: absolute;
-		font-size: 22px;
-		left: 28px;
-		padding-top: 4px;
-		color: #555e60;
-	}
-
-	.form-group:nth-of-type(3)::before {
-		font-family: 'Font Awesome\ 5 Free';
-		content: "\f023";
-		position: absolute;
-		font-size: 22px;
-		left: 28px;
-		padding-top: 4px;
-		color: #555e60;
-	}
-
-	.form-group:last-of-type::before {
-		content: "\f023";
-	}
-
-	.form-input button {
-		width: 40%;
-		margin: 5px 0px 25px;
-	}
-
-	.btn-success {
-		background-color: #1c6288;
-		font-size: 19px;
-		border-radius: 5px;
-		padding: 7px 14px;
-		border: 1px solid #daf1ff;
-		padding-left: 7px;
-
-	}
-
-	.btn-success:hover {
-		background-color: #13445e;
-		border: 1px solid #daf1ff;
+	.form-control:focus {
+		border-color: green;
+		box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px gre;
 	}
 </style>
 {% endblock %}﻿
