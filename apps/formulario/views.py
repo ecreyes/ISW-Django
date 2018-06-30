@@ -28,10 +28,7 @@ def form_file(request):
             precio = form.cleaned_data['precio']
             tipo = form.cleaned_data['tipo']
             opcion = form.cleaned_data['opcion']
-            desde = form.cleaned_data['desde']
-            hasta = form.cleaned_data['hasta']
             handle_uploaded_file(request.FILES['symbol'])
-            print(file)
             return HttpResponseRedirect('/graficos/') #Redirigir a nueva pagina ,agregando los datos obtenidos del formulario como contexto
     else:
         form = FormularioArchivoCsv()
