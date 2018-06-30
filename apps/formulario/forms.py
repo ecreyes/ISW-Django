@@ -63,21 +63,6 @@ class FormularioArchivoCsv(forms.Form):
             }
         )
     )
-    desde = forms.DateField(widget=forms.DateInput(
-            attrs={
-                'style': 'border-color: green;',
-                'placeholder': 'Desde --- Ex: 23/04/2016',
-                'class': 'form-control'
-            }
-        )
-    )
-    hasta = forms.DateField(widget=forms.DateInput(
-            attrs={
-                'style': 'border-color: green;',
-                'placeholder': 'Hasta --- Ex: 26/04/2016',
-                'class': 'form-control'
-            }
-        )
-    )
+
 
     
