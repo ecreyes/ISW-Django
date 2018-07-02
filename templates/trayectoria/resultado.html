@@ -1,3 +1,18 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>  
+<style>
+.buttonPill {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+</style>
 {% extends 'base/base.html' %}
 
 {% block title %}
@@ -5,11 +20,160 @@ Valoración de Acciones sobre Opciones
 {% endblock %}
 
 {% block content %}
-<h1>Resultados</h1>
-{%if funcion %}
-		<h3>F(x,t)={{funcion}}</h3>
-{%endif %}
-{% if promedio%}
-		<h2>Promedio={{promedio}}</h2>
-{% endif %}
+
+
+<!--div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 mx-auto">
+            <div class="card card-body" style="border: none;">
+                <h1 class="text-center mb-">Resultados</h1>
+                
+
+                <ul class="nav nav-tabs">
+                  <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
+                  <li><a data-toggle="tab" href="#menu1">Menu 1</a></li>
+                  <li><a data-toggle="tab" href="#menu2">Menu 2</a></li>
+                </ul>
+
+                <div class="tab-content">
+                  <div id="home" class="tab-pane">
+                    {%if funcion %}
+                        <h3>F(x,t)={{funcion}}</h3>
+                    {%endif %}
+                    {% if promedio%}
+                            <h2>Promedio={{promedio}}</h2>
+                    {% endif %}
+                    {% if promedio%}
+                      </div>
+                      <div id="menu1" class="tab-pane">
+                    <div class="chart-container" style="position: relative; height: 40vh; width:70vw">
+                        <canvas id="valores_tray"></canvas>
+                    </div>
+                  </div>
+                  <div id="menu2" class="tab-pane fade">
+                    <div class="chart-container" style="position: relative; height: 40vh; width:70vw">
+                        <canvas id="valores_cie"></canvas>
+                    </div>
+                  </div>
+                </div>
+                {% endif %}
+                
+            </div>
+        </div>
+    </div>
+</div-->
+
+
+<div class="container">
+  <h1>Resultados</h1>
+    {%if funcion %}
+    <h3>F(x,t)={{funcion}}</h3>
+    {%endif %}
+    {% if promedio%}
+    <h2>Promedio={{promedio}}</h2>
+    {% endif %}
+  <ul class="nav nav-pills">
+    <li class="active"><a class = "buttonPill" data-toggle="pill" href="#home">Grafico 1</a></li>
+    <li><a class = "buttonPill" data-toggle="pill" href="#menu1">Grafico 2</a></li>
+    <li><a class = "buttonPill" data-toggle="pill" href="#menu2">Grafico 3</a></li>
+    <li><a class = "buttonPill" data-toggle="pill" href="#menu3">Grafico 4</a></li>
+  </ul>
+  
+  <div class="tab-content">
+    <div id="home" class="tab-pane fade in active">
+      <div class="chart-container" style="position: relative; height: 40vh; width:70vw">
+        <canvas id="valores_tray"></canvas>
+      </div>
+    </div>
+    <div id="menu1" class="tab-pane fade">
+      <div class="chart-container" style="position: relative; height: 40vh; width:70vw">
+        <canvas id="valores_cie"></canvas>
+      </div>
+    </div>
+    <div id="menu2" class="tab-pane fade">
+      <h3>Grafico 3</h3>
+      <p>Grafico 3</p>
+    </div>
+    <div id="menu3" class="tab-pane fade">
+      <h3>Grafico 4</h3>
+      <p>Grafico 4</p>
+    </div>
+  </div>
+</div>
+
+
+<script>
+var ctx = document.getElementById("valores_cie");
+var myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        datasets: [{
+            data: eval("{{valores_cierre|safe}}"),
+            label: 'Valores de cierre iniciales',
+
+            // This binds the dataset to the right y axis
+            yAxisID: 'left-y-axis',
+            pointBackgroundColor: 'rgba(33, 145, 81, 0.2)',
+            backgroundColor: 'rgba(33, 145, 81, 0.2)',
+        }],
+        labels: eval("{{dias_i|safe}}")
+    },
+    options: {
+        scales: {
+            yAxes: [ {
+                id: 'left-y-axis',
+                type: 'linear',
+                position: 'left'
+            }]
+        }
+    }
+});
+</script>
+<script>    
+var ctx = document.getElementById("valores_tray");
+var myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        datasets: [{
+            data: eval("{{valores_trayectoria|safe}}"),
+            label: 'Valor trayectoria por iteración',
+
+            // This binds the dataset to the right y axis
+            yAxisID: 'left-y-axis',
+            showLine: false,
+            pointBackgroundColor: "red",
+            backgroundColor: "red"
+        }, {
+            data: eval("{{lista_prom|safe}}"),
+            label: 'Promedio trayectoria',
+
+            // This binds the dataset to the right y axis
+            yAxisID: 'left-y-axis',
+            borderColor: "blue",
+            fill: false,
+            radius: 0
+
+        }],
+        labels: eval("{{num_tray|safe}}")
+        
+    },
+
+    options: {
+        scales: {
+            yAxes: [{
+                id: 'left-y-axis',
+                type: 'linear',
+                position: 'left'
+            }]
+        },
+
+        
+    }
+
+});
+</script>
 {% endblock %}
+
+
+
+

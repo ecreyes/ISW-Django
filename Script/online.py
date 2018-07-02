@@ -1,6 +1,5 @@
 from yahoo_quote_download import yqd
 import numpy as np
-
 #Simulación de una trayectoria
 ###INPUTS###
 #s_1: valor trayectoria actual
@@ -35,10 +34,9 @@ def simulacion(nombre,desde,hasta,i_anios,i_tasa,i_precio, num_tray):
         #obtengo los datos de FB , desde-hasta
         datos = yqd.load_yahoo_quote(nombre, desde, hasta)
         #lista contiene todos los valores de cierre
-        dias_i = []
         valores_cierre = []
+        dias_i = []
         for i in datos:
-                
                 if (i):
                         lista = i.split(',')
                         if(lista[4]!='Close'):
@@ -80,5 +78,10 @@ def simulacion(nombre,desde,hasta,i_anios,i_tasa,i_precio, num_tray):
         esperanza = np.mean(valores_max)
         funcion = np.exp(-i_tasa*i_anios)*esperanza
         media_trayectorias = np.mean(valores_trayectorias)
-        return [funcion, media_trayectorias, valores_trayectorias,valores_max,valores_cierre,dias_i]
+
+        lista_num_tray = list(range(0,len(valores_trayectorias)))
+        lista_prom_tray = [media_trayectorias] * len(valores_trayectorias)
+
+
+        return [funcion, media_trayectorias, valores_trayectorias,valores_cierre,dias_i,lista_num_tray,lista_prom_tray]
 
