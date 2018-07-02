@@ -26,7 +26,7 @@ def trayectoria(s_1,conta,d,r,sigma,t):
 #i_anios: tiempo en años que se quieren estimar
 #i_tasa: valor de la tasa
 #i_precio: precio inicial
-#num_tray: numero de trayectorias a generar
+#num_tray: numero de trayectorias a genzerar
 ###OUTPUTS###
 #funcion: valor final de la simulacion
 #media_trayectorias: promedio/media de las trayectorias obtenidas
@@ -35,14 +35,16 @@ def simulacion(nombre,desde,hasta,i_anios,i_tasa,i_precio, num_tray):
         #obtengo los datos de FB , desde-hasta
         datos = yqd.load_yahoo_quote(nombre, desde, hasta)
         #lista contiene todos los valores de cierre
+        dias_i = []
         valores_cierre = []
         for i in datos:
+                
                 if (i):
                         lista = i.split(',')
                         if(lista[4]!='Close'):
                                 valores_cierre.append(float(lista[4]))
-                                a = str(float(lista[4]))
-
+                                a = str((lista[0]))
+                                dias_i.append(a)
         #lista contiene todos los valores del ln(j/j-1)
         valores_log = []
         for j in range(1,len(valores_cierre)):
@@ -63,7 +65,6 @@ def simulacion(nombre,desde,hasta,i_anios,i_tasa,i_precio, num_tray):
         valores_max = []
 
 
-
         #simulacion de todas las trayectorias requeridas
 
         for i in range(1,trayectorias):
@@ -78,5 +79,7 @@ def simulacion(nombre,desde,hasta,i_anios,i_tasa,i_precio, num_tray):
         esperanza = np.mean(valores_max)
         funcion = np.exp(-i_tasa*i_anios)*esperanza
         media_trayectorias = np.mean(valores_trayectorias)
-        return [funcion, media_trayectorias, valores_trayectorias]
+        return [funcion, media_trayectorias, valores_trayectorias,valores_max,valores_cierre,dias_i]
+
+
 

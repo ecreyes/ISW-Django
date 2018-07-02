@@ -42,7 +42,7 @@ def index(request):
             hasta_string = str(hasta.year)+hasta_mes+hasta_dia
             resultado = simulacion(simbol,desde_string,hasta_string,tiempo_años,tasa_de_interes,precio,100)
 
-            context ={'funcion':resultado[0],'promedio':resultado[1]}
+            context ={'funcion':resultado[0],'promedio':resultado[1],'valores_trayectoria':resultado[2],'valores_cierre':resultado[3],'dias_i':resultado[4],'num_tray':resultado[5],'lista_prom':resultado[6]}
             return render(request,'trayectoria/resultado.html',context) #Redirigir a nueva pagina ,agregando los datos obtenidos del formulario como contexto
     else:
         form = TrayectoriaForm()
