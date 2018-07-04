@@ -4,15 +4,15 @@ from django.forms.widgets import Select, Widget
 from django.http import HttpResponseRedirect
 from django.template import RequestContext
 from django.urls import reverse_lazy
+import os
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 #def handle_uploaded_file(f):
 #    with open('some/file/name.csv', 'wb+') as destination: #directorio donde deberia ir el  archivo
 #        for chunk in f.chunks():
 #            destination.write(chunk)
-
-
 #cambiar directorio
 def handle_uploaded_file(f):
-    with open('C:/Users/fgfg/Desktop/ISW-D/ISW-Django/apps/formulario/media/nuevo_archivo.csv', 'wb+') as destination:
+    with open(BASE_DIR + '\\media\\archivo_formulario.csv', 'wb+') as destination:
         for chunk in f.chunks():
             destination.write(chunk)
 
