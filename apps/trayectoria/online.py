@@ -82,6 +82,6 @@ def simulacion(nombre,desde,hasta,i_anios,i_tasa,i_precio, num_tray):
         lista_num_tray = list(range(0,len(valores_trayectorias)))
         lista_prom_tray = [media_trayectorias] * len(valores_trayectorias)
 
-
+        #[funcion, media_trayectorias, valores_trayectorias,valores_cierre,dias_i,lista_num_tray,lista_prom_tray,desde,hasta,i_anios,i_tasa,i_precio,nombre]
         return [funcion, media_trayectorias, valores_trayectorias,valores_cierre,dias_i,lista_num_tray,lista_prom_tray]
 

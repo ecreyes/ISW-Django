@@ -1,5 +1,10 @@
-from yahoo_quote_download import yqd
 import numpy as np
+
+#Funcion auxiliar para transformar el formato de fecha YYYY-MM-DD a una en formato DD/MM/YYYY
+def formato_fecha(fecha):
+        aux = fecha.split("-")
+        fecha_form = aux[2]+"/"+aux[1]+"/"+aux[0]
+        return fecha_form
 
 #Simulación de una trayectoria
 ###INPUTS###
@@ -31,20 +36,25 @@ def trayectoria(s_1,conta,d,r,sigma,t):
 #funcion: valor final de la simulacion
 #media_trayectorias: promedio/media de las trayectorias obtenidas
 #valores_trayectorias: lista de los valores de las trayectorias
-def simulacion(nombre,desde,hasta,i_anios,i_tasa,i_precio, num_tray):
+def simulacion(nombre,i_anios,i_tasa,i_precio, num_tray):
         #obtengo los datos de FB , desde-hasta
-        datos = yqd.load_yahoo_quote(nombre, desde, hasta)
         #lista contiene todos los valores de cierre
         dias_i = []
         valores_cierre = []
+        datos = open(nombre+".csv","r")
+
+        contador = 0
         for i in datos:
-                
-                if (i):
-                        lista = i.split(',')
-                        if(lista[4]!='Close'):
-                                valores_cierre.append(float(lista[4]))
-                                a = str((lista[0]))
-                                dias_i.append(a)
+                lista = i.rstrip('\n').split(",")
+                if (lista[4] != 'Close'):
+                        if contador == 0:
+                                desde = lista[0]
+                                contador = 1
+                        valores_cierre.append(float(lista[4]))
+                        a = str((lista[0]))
+                        hasta = lista[0]
+                        dias_i.append(a)
+
         #lista contiene todos los valores del ln(j/j-1)
         valores_log = []
         for j in range(1,len(valores_cierre)):
@@ -79,11 +89,17 @@ def simulacion(nombre,desde,hasta,i_anios,i_tasa,i_precio, num_tray):
         esperanza = np.mean(valores_max)
         funcion = np.exp(-i_tasa*i_anios)*esperanza
         media_trayectorias = np.mean(valores_trayectorias)
+        desde_fo = formato_fecha(desde)
+        hasta_fo = formato_fecha(hasta)
+        print("desde: ",desde_fo)
+        print("hasta: ",hasta_fo)
         return [funcion, media_trayectorias, valores_trayectorias,valores_max,valores_cierre,dias_i]
 
-#nombre,desde,hasta,i_anios,i_tasa,i_precio, num_tray
-funcion, media_trayectoria,valores_trayectorias,valores_max,valores_cierre,dias_i = simulacion('AAPL','20170720','20180720',1,0.01,60,1000)
+
+#nombre,i_anios,i_tasa,i_precio, num_tray
+funcion, media_trayectoria,valores_trayectorias,valores_max,valores_cierre,dias_i = simulacion('BABA',1,0.01,60,1000)
 print(funcion)
 print(media_trayectoria)
+
 
 
