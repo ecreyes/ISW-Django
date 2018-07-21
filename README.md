@@ -113,3 +113,10 @@ los demas se pueden omitir
 sobre la tabla , y oprimimos la opción 'Import/Export', aquí, marcamos la opción 'Import' , agregamos el archivo
 'companylist5.csv' ,elegimos " | " como delimitador,  cambiamos el HEADER a Yes, y en la pestaña de Columnas, en el primer campo , eliminamos la tabla
 'id', le damos a Ejecutar.
+
+## Cambiar Archivo de Empresas en la Base de Datos
+
+1) Iniciamos pgAdmin, e iniciamos la base de datos, vamos a 'trayectoria.enterprise', click derecho y oprimimos 
+'Truncate', luego, nuevamente, oprimimos la opción 'Import/Export', marcamos la opción 'Import', agregamos el archivo
+'empresas.csv' (estará en el directorio raíz),elegimos " | " como delimitador,  mantenemos el HEADER en NO, y en la pestaña de Columnas, en el primer campo , eliminamos la tabla
+'id', le damos a Ejecutar.
