@@ -1,7 +1,15 @@
-from yahoo_quote_download import yqd
+###OFFLINE####
 import numpy as np
 import os
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+
+#Funcion auxiliar para transformar el formato de fecha YYYY-MM-DD a una en formato DD/MM/YYYY
+def formato_fecha(fecha):
+        aux = fecha.split("-")
+        fecha_form = aux[2]+"/"+aux[1]+"/"+aux[0]
+        return fecha_form
+
 
 #Simulación de una trayectoria
 ###INPUTS###
@@ -28,24 +36,30 @@ def trayectoria(s_1,conta,d,r,sigma,t):
 #i_anios: tiempo en años que se quieren estimar
 #i_tasa: valor de la tasa
 #i_precio: precio inicial
-#num_tray: numero de trayectorias a generar
+#num_tray: numero de trayectorias a genzerar
 ###OUTPUTS###
 #funcion: valor final de la simulacion
 #media_trayectorias: promedio/media de las trayectorias obtenidas
 #valores_trayectorias: lista de los valores de las trayectorias
 def simulacion(i_anios,i_tasa,i_precio, num_tray):
         #obtengo los datos de FB , desde-hasta
-        datos = open(BASE_DIR + '\\media\\archivo_formulario.csv',"r")
         #lista contiene todos los valores de cierre
-        valores_cierre = []
         dias_i = []
+        valores_cierre = []
+        datos = open(BASE_DIR + '\\media\\archivo_formulario.csv',"r")
+
+        contador = 0
         for i in datos:
-                if (i):
-                        lista = i.split(',')
-                        if(lista[4]!='Close'):
-                                valores_cierre.append(float(lista[4]))
-                                a = str((lista[0]))
-                                dias_i.append(a)
+                lista = i.rstrip('\n').split(",")
+                if (lista[4] != 'Close'):
+                        if contador == 0:
+                                desde = lista[0]
+                                contador = 1
+                        valores_cierre.append(float(lista[4]))
+                        a = str((lista[0]))
+                        hasta = lista[0]
+                        dias_i.append(a)
+        datos.close()
         #lista contiene todos los valores del ln(j/j-1)
         valores_log = []
         for j in range(1,len(valores_cierre)):
@@ -66,7 +80,6 @@ def simulacion(i_anios,i_tasa,i_precio, num_tray):
         valores_max = []
 
 
-
         #simulacion de todas las trayectorias requeridas
 
         for i in range(1,trayectorias):
@@ -81,10 +94,17 @@ def simulacion(i_anios,i_tasa,i_precio, num_tray):
         esperanza = np.mean(valores_max)
         funcion = np.exp(-i_tasa*i_anios)*esperanza
         media_trayectorias = np.mean(valores_trayectorias)
-
         lista_num_tray = list(range(0,len(valores_trayectorias)))
         lista_prom_tray = [media_trayectorias] * len(valores_trayectorias)
 
+        desde_fo = formato_fecha(desde)
+        hasta_fo = formato_fecha(hasta)
 
-        return [funcion, media_trayectorias, valores_trayectorias,valores_cierre,dias_i,lista_num_tray,lista_prom_tray]
 
+        return [funcion, media_trayectorias, valores_trayectorias,valores_cierre,dias_i,lista_num_tray,lista_prom_tray,desde_fo,hasta_fo]
+
+
+#nombre,desde,hasta,i_anios,i_tasa,i_precio, num_tray
+#funcion, media_trayectoria,valores_trayectorias,valores_max,valores_cierre,dias_i = simulacion('AAPL','20170720','20180720',1,0.01,60,1000)
+#print(funcion)
+#print(media_trayectoria)

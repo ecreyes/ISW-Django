@@ -1,19 +1,25 @@
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>  
 <style>
-    .buttonPill {
-        background-color: #4CAF50;
-        border: none;
-        color: white;
-        padding: 15px 32px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-        margin: 4px 2px;
-        cursor: pointer;
-    }
+.buttonPill {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
 </style>
-{% extends 'base/base.html' %} {% block title %} Valoración de Acciones sobre Opciones {% endblock %} {% block content %}
+{% extends 'base/base.html' %}
+
+{% block title %}
+Valoración de Acciones sobre Opciones
+{% endblock %}
+
+{% block content %}
 
 
 <!--div class="container-fluid">
@@ -57,14 +63,192 @@
     </div>
 </div-->
 
+<div class="row">
+     <div class="col-md-4">
+      <div class="container">
+       <div class="panel panel-default">
+        <div class="panel-body">
+         <table class="table table-striped table-bordered table-hover">
+            
+            <tbody>   
+                <tr>
+                    <th  align="center" colspan="2" scope="row"><h1 align="center">Resultados</h1></th>
 
-<div class="container">
-    <h1>Resultados</h1>
-    {%if funcion %}
-    <h3>F(x,t)={{funcion}}</h3>
-    {%endif %} {% if promedio%}
-    <h2>Promedio={{promedio}}</h2>
-    {% endif %}
+                </tr>
+                <tr>
+                    <th scope="row"><h3>F(x,t)</h3></th>
+                    <td>
+                        {%if funcion %}
+                        <h3>{{funcion}}</h3>
+                        {%else%}
+                        <h3>0</h3>
+                        {%endif %}                            
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row"><h3>Promedio</h3></th>
+                    <td>
+                        {% if promedio%}
+                        <h3>{{promedio}}</h3>
+                        {%else%}
+                        <h3>0</h3>
+                        {%endif %}                              
+                    </td>
+                </tr>
 
+            </tbody>
+         </table>
+         <br>
+         <br>
+         <br>
+         <table class="table table-striped table-bordered table-hover">
+            
+            <tbody>   
+                <tr>
+                    <th  align="center" colspan="2" scope="row"><h4 align="center">Datos ingresados</h4></th>
+
+                </tr>
+                <tr>
+                    <th scope="row">Desde</th>
+                    <td>
+                        {{desde_dia}}                                 
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">Hasta</th>
+                    <td>
+                        {{hasta_dia}}
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">Tiempo (en años) ingresado</th>
+                    <td>
+                        {{tiempo_años}}
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">Tasa de interes</th>
+                    <td>
+                        {{tasa_de_interes}}
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">Precio ingresado</th>
+                    <td>
+                        {{precio_i}}
+                    </td>
+                </tr>
+            </tbody>
+         </table>
+         </div>
+       </div>
+      </div>
+    </div>
+    <div class="col-md-8">
+        <ul class="nav nav-pills">
+         <li class="active"><a class = "buttonPill" data-toggle="pill" href="#home">Grafico 1</a></li>
+         <li><a class = "buttonPill" data-toggle="pill" href="#menu1">Grafico 2</a></li>
+         <li><a class = "buttonPill" data-toggle="pill" href="#menu2">Grafico 3</a></li>
+         <li><a class = "buttonPill" data-toggle="pill" href="#menu3">Grafico 4</a></li>
+        </ul>
+      
+        <div class="tab-content">
+          <div id="home" class="tab-pane fade in active">
+           <div class="chart-container" style="position: relative; height: 40vh; width:60vw">
+            <canvas id="valores_tray"></canvas>
+           </div>
+          </div>
+          <div id="menu1" class="tab-pane fade">
+            <div class="chart-container" style="position: relative; height: 40vh; width:60vw">
+              <canvas id="valores_cie"></canvas>
+            </div>
+          </div>
+          <div id="menu2" class="tab-pane fade">
+            <h3>Grafico 3</h3>
+              <p>Grafico 3</p>
+              En construccion...
+          </div>
+          <div id="menu3" class="tab-pane fade">
+            <h3>Grafico 4</h3>
+              <p>Grafico 4</p>
+              En construccion...
+          </div>
+        </div>
+    </div>
 </div>
+
+<script>
+var ctx = document.getElementById("valores_cie");
+var myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        datasets: [{
+            data: eval("{{valores_cierre|safe}}"),
+            label: 'Valores de cierre iniciales',
+
+            // This binds the dataset to the right y axis
+            yAxisID: 'left-y-axis',
+            pointBackgroundColor: 'rgba(33, 145, 81, 0.2)',
+            backgroundColor: 'rgba(33, 145, 81, 0.2)',
+        }],
+        labels: eval("{{dias_i|safe}}")
+    },
+    options: {
+        scales: {
+            yAxes: [ {
+                id: 'left-y-axis',
+                type: 'linear',
+                position: 'left'
+            }]
+        }
+    }
+});
+</script>
+<script>    
+var ctx = document.getElementById("valores_tray");
+var myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        datasets: [{
+            data: eval("{{valores_trayectoria|safe}}"),
+            label: 'Valor trayectoria por iteración',
+
+            // This binds the dataset to the right y axis
+            yAxisID: 'left-y-axis',
+            showLine: false,
+            pointBackgroundColor: "red",
+            backgroundColor: "red"
+        }, {
+            data: eval("{{lista_prom|safe}}"),
+            label: 'Promedio trayectoria',
+
+            // This binds the dataset to the right y axis
+            yAxisID: 'left-y-axis',
+            borderColor: "blue",
+            fill: false,
+            radius: 0
+
+        }],
+        labels: eval("{{num_tray|safe}}")
+        
+    },
+
+    options: {
+        scales: {
+            yAxes: [{
+                id: 'left-y-axis',
+                type: 'linear',
+                position: 'left'
+            }]
+        },
+
+        
+    }
+
+});
+</script>
 {% endblock %}
+
+
+
+
