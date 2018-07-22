@@ -30,7 +30,7 @@ def trayectoria(s_1,conta,d,r,sigma,t):
 #funcion: valor final de la simulacion
 #media_trayectorias: promedio/media de las trayectorias obtenidas
 #valores_trayectorias: lista de los valores de las trayectorias
-def simulacion(nombre,desde,hasta,i_anios,i_tasa,i_precio, num_tray):
+def simulacion(nombre,desde,hasta,i_anios,i_tasa,i_precio, num_tray,tipo_derecho):
         #obtengo los datos de FB , desde-hasta
         datos = yqd.load_yahoo_quote(nombre, desde, hasta)
         #lista contiene todos los valores de cierre
@@ -70,7 +70,12 @@ def simulacion(nombre,desde,hasta,i_anios,i_tasa,i_precio, num_tray):
                 #simulacion de 1 trayectoria
                 sn_1 = trayectoria(s[len(s)-1],0,d,r,sigma,t)
                 valores_trayectorias.append(sn_1) #agrego ultimo valor de la trayectoria simulada
-                valores_max.append(np.maximum(sn_1-precio,0)) #agrego maximo entre 0 y la diferencia entre el ultimo valor de trayectoria simuladay el precio
+                
+                #Calculo de acuerdo al tipo de derecho de opcion escojida
+                if tipo_derecho == 'Compra':
+                        valores_max.append(np.maximum(sn_1-precio,0)) #agrego maximo entre 0 y la diferencia entre el ultimo valor de trayectoria simulada y el precio
+                if tipo_derecho == 'Venta':
+                        valores_max.append(np.maximum(precio-sn_1,0)) #agrego maximo entre 0 y la diferencia entre el precio y el ultimo valor de trayectoria simulada 
                 #inicializo valores para futuras trayectorias.
                 sigma = np.std(valores_log)
                 RC = valores_log
