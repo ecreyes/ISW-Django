@@ -1,50 +1,50 @@
 {% extends 'base/base.html' %} {% block title %} Valoración de Acciones sobre Opciones {% endblock %} {% block content %}
-<link rel="stylesheet" type="text/css" href=https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.min.css>
-<div class="container-fluid py-3">
+<div class="container-fluid py-3 animated fadeIn">
     <div class="row">
-        <div class="col-md-12 mx-auto">
+        <div class="col-md-2"></div>
+        <div class="col-md-8 mx-auto">
             <div class="card card-body">
                 <h3 class="text-center mb-4">Valoración de Opciones</h3>
                 <form class="well form-horizontal" action=" " method="post" id="contact_form" enctype="multipart/form-data">
                     {% csrf_token%}
                     <h4>Información Ecónomica de la Empresa</h4>
                     <div class="row">
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-6">
                             {{form.symbol}}
                         </div>
                     </div>
                     <div class="row">
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-6">
                             {{form.tasa_de_interes}}
                         </div>
                     </div>
                     <h4>Tipo de Opción </h4>
                     <div class="row">
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-6">
                             {{form.tipo}}
                         </div>
                     </div>
                     <div class="row">
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-6">
                             {{form.opcion}}
                         </div>
                     </div>
                     <h4>Precio y Fecha de Ejercicio </h4>
                     <div class="row">
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-6">
                             {{form.precio}}
                         </div>
                     </div>
                     <div class="row">
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-6">
                             {{form.tiempo_años}}
                         </div>
                     </div>
                     <div class="row">
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-6">
                             {{form.desde}}
                         </div>
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-6">
                             {{form.hasta}}
                         </div>
                     </div>
@@ -52,6 +52,7 @@
                 </form>
             </div>
         </div>
+        <div class="col-md-2"></div>
     </div>
 </div>
 
