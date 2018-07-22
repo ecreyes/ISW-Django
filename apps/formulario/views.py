@@ -30,10 +30,10 @@ def form_file(request):
             tipo = form.cleaned_data['tipo']
             opcion = form.cleaned_data['opcion']
             handle_uploaded_file(request.FILES['symbol'])
-            resultado = simulacion(tiempo_años,tasa_de_interes,precio,100)
+            resultado = simulacion(tiempo_años,tasa_de_interes,precio,100,tipo)
             
             context ={'funcion':resultado[0],'promedio':resultado[1],'valores_trayectoria':resultado[2],'valores_cierre':resultado[3],'dias_i':resultado[4],'num_tray':resultado[5],'lista_prom':resultado[6],
-            'desde_dia':resultado[7], 'hasta_dia':resultado[8], 'tiempo_años':tiempo_años, 'tasa_de_interes':tasa_de_interes, 'precio_i':precio}
+            'desde_dia':resultado[7], 'hasta_dia':resultado[8], 'tiempo_años':tiempo_años, 'tasa_de_interes':tasa_de_interes, 'precio_i':precio, 'tipo_opcion':tipo, 'opcion':opcion}
             return render(request,'formulario/resultado.html',context) #Redirigir a nueva pagina ,agregando los datos obtenidos del formulario como contexto
     else:
         form = FormularioArchivoCsv()

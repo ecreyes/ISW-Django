@@ -1,10 +1,15 @@
+###OFFLINE####
 import numpy as np
+import os
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 
 #Funcion auxiliar para transformar el formato de fecha YYYY-MM-DD a una en formato DD/MM/YYYY
 def formato_fecha(fecha):
         aux = fecha.split("-")
         fecha_form = aux[2]+"/"+aux[1]+"/"+aux[0]
         return fecha_form
+
 
 #Simulación de una trayectoria
 ###INPUTS###
@@ -36,12 +41,12 @@ def trayectoria(s_1,conta,d,r,sigma,t):
 #funcion: valor final de la simulacion
 #media_trayectorias: promedio/media de las trayectorias obtenidas
 #valores_trayectorias: lista de los valores de las trayectorias
-def simulacion(nombre,i_anios,i_tasa,i_precio, num_tray):
+def simulacion(i_anios,i_tasa,i_precio, num_tray,tipo_derecho):
         #obtengo los datos de FB , desde-hasta
         #lista contiene todos los valores de cierre
         dias_i = []
         valores_cierre = []
-        datos = open(nombre+".csv","r")
+        datos = open(BASE_DIR + '\\media\\archivo_formulario.csv',"r")
 
         contador = 0
         for i in datos:
@@ -54,7 +59,7 @@ def simulacion(nombre,i_anios,i_tasa,i_precio, num_tray):
                         a = str((lista[0]))
                         hasta = lista[0]
                         dias_i.append(a)
-
+        datos.close()
         #lista contiene todos los valores del ln(j/j-1)
         valores_log = []
         for j in range(1,len(valores_cierre)):
@@ -81,7 +86,11 @@ def simulacion(nombre,i_anios,i_tasa,i_precio, num_tray):
                 #simulacion de 1 trayectoria
                 sn_1 = trayectoria(s[len(s)-1],0,d,r,sigma,t)
                 valores_trayectorias.append(sn_1) #agrego ultimo valor de la trayectoria simulada
-                valores_max.append(np.maximum(sn_1-precio,0)) #agrego maximo entre 0 y la diferencia entre el ultimo valor de trayectoria simuladay el precio
+                #Calculo de acuerdo al tipo de derecho de opcion escojida
+                if tipo_derecho == 'Compra':
+                        valores_max.append(np.maximum(sn_1-precio,0)) #agrego maximo entre 0 y la diferencia entre el ultimo valor de trayectoria simulada y el precio
+                if tipo_derecho == 'Venta':
+                        valores_max.append(np.maximum(precio-sn_1,0)) #agrego maximo entre 0 y la diferencia entre el precio y el ultimo valor de trayectoria simulada 
                 #inicializo valores para futuras trayectorias.
                 sigma = np.std(valores_log)
                 RC = valores_log
@@ -89,17 +98,17 @@ def simulacion(nombre,i_anios,i_tasa,i_precio, num_tray):
         esperanza = np.mean(valores_max)
         funcion = np.exp(-i_tasa*i_anios)*esperanza
         media_trayectorias = np.mean(valores_trayectorias)
+        lista_num_tray = list(range(0,len(valores_trayectorias)))
+        lista_prom_tray = [media_trayectorias] * len(valores_trayectorias)
+
         desde_fo = formato_fecha(desde)
         hasta_fo = formato_fecha(hasta)
-        print("desde: ",desde_fo)
-        print("hasta: ",hasta_fo)
-        return [funcion, media_trayectorias, valores_trayectorias,valores_max,valores_cierre,dias_i]
 
 
-#nombre,i_anios,i_tasa,i_precio, num_tray
-funcion, media_trayectoria,valores_trayectorias,valores_max,valores_cierre,dias_i = simulacion('BABA',1,0.01,60,1000)
-print(funcion)
-print(media_trayectoria)
+        return [funcion, media_trayectorias, valores_trayectorias,valores_cierre,dias_i,lista_num_tray,lista_prom_tray,desde_fo,hasta_fo]
 
 
-
+#nombre,desde,hasta,i_anios,i_tasa,i_precio, num_tray
+#funcion, media_trayectoria,valores_trayectorias,valores_max,valores_cierre,dias_i = simulacion('AAPL','20170720','20180720',1,0.01,60,1000)
+#print(funcion)
+#print(media_trayectoria)
